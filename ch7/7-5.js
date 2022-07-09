@@ -1,11 +1,38 @@
+class TelephoneNeumber {
+  #number;
+  #areaCode;
+  constructor(areaCode, number) {
+    this.#number = number;
+    this.#areaCode = areaCode;
+  }
+
+  get number() {
+    return this.#number;
+  }
+
+  set number(number) {
+    this.#number = number;
+  }
+
+  get areaCode() {
+    return this.#areaCode;
+  }
+
+  set areaCode(areaCode) {
+    this.#areaCode = areaCode;
+  }
+
+  get toString() {
+    return `${this.#areaCode} ${this.#number}`;
+  }
+}
+
 class Person {
   #name;
-  #officeAreaCode;
-  #officeNumber;
+  #telephoneNumber;
   constructor(name, areaCode, number) {
     this.#name = name;
-    this.#officeAreaCode = areaCode;
-    this.#officeNumber = number;
+    this.#telephoneNumber = new TelephoneNeumber(areaCode, number);
   }
 
   get name() {
@@ -17,23 +44,15 @@ class Person {
   }
 
   get telephoneNumber() {
-    return `(${this.officeAreaCode}) ${this.officeNumber}`;
-  }
-
-  get officeAreaCode() {
-    return this.#officeAreaCode;
-  }
-
-  set officeAreaCode(arg) {
-    this.#officeAreaCode = arg;
+    return this.#telephoneNumber.toString;
   }
 
   get officeNumber() {
-    return this.#officeNumber;
+    return this.#telephoneNumber.number;
   }
 
-  set officeNumber(arg) {
-    this.#officeNumber = arg;
+  get officeAreaCode() {
+    return this.#telephoneNumber.areaCode;
   }
 }
 
