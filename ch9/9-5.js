@@ -1,7 +1,7 @@
 class Order {
-  constructor(data) {
-    this._number = data.number;
-    this._customer = new Customer(data.customerId);
+  constructor(number, customer) {
+    this._number = number;
+    this._customer = customer;
   }
 
   get customer() {
@@ -18,3 +18,28 @@ class Customer {
     return this._id;
   }
 }
+
+class CustomerRepository {
+  #customers;
+
+  constructor() {
+    this.#customers = new Map();
+  }
+
+  registerCustomer(id) {
+    if(!this.#customers.has(id)) {
+      this.#customers.set(id, new Customer(id));
+    }
+    return this.findCustomer(id);
+  }
+
+  findCustomer(id) {
+    return this.#customers.get(id);
+  }
+}
+
+const customerRepository = new CustomerRepository();
+
+
+const order = new Order('12345', customerRepository.registerCustomer('12-34'));
+console.log(order.customer.id)
