@@ -18,10 +18,23 @@ class CatalogItem {
   }
 }
 
-class Scroll extends CatalogItem {
-  constructor(id, title, tags, dataLastCleaned) {
-    super(id, title, tags);
+class Scroll {
+  constructor(id, dataLastCleaned, catalogId, catalog) {
+    this._id = id;
+    this._catalogItem = catalog.get(catalogId);
     this._lastCleaned = dataLastCleaned;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get title() {
+    return this._catalogItem._title;
+  }
+
+  hasTag(arg) {
+    return this._catalogItem._tags.includes(arg);
   }
 
   needsCleaning(targetDate) {
